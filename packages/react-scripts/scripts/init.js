@@ -107,7 +107,12 @@ module.exports = function(
   };
 
   // Setup the browsers list
-  appPackage.browserslist = defaultBrowsers;
+  // @cermakjiri - start
+  appPackage.browserslist = {
+    development: ['last 2 chrome version'],
+    production: ['last 2 chrome version'],
+  };
+  // @cermakjiri - end
 
   fs.writeFileSync(
     path.join(appPath, 'package.json'),
