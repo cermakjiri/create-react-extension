@@ -34,6 +34,10 @@ const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpackPlugin');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 const eslint = require('eslint');
+// @cermakjiri - start
+const ExtensionReloader = require('webpack-extension-reloader');
+// @cermakjiri - end
+
 // @remove-on-eject-begin
 const getCacheIdentifier = require('react-dev-utils/getCacheIdentifier');
 // @remove-on-eject-end
@@ -535,6 +539,14 @@ module.exports = function(webpackEnv) {
       ],
     },
     plugins: [
+      // @cermakjiri - start
+      isEnvDevelopment &&
+        new ExtensionReloader({
+          manifest: paths.manifestJson,
+          port: process.env.PORT,
+        }),
+      // @cermakjiri - end
+
       // Generates an `index.html` file with the <script> injected.
       new HtmlWebpackPlugin(
         Object.assign(
