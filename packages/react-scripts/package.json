@@ -1,6 +1,6 @@
 {
   "name": "@ackee/react-scripts-browser-extension",
-  "version": "0.1.2",
+  "version": "0.2.0-alpha.0",
   "description": "Configuration and scripts for Create React Browser Extension",
   "repository": {
     "type": "git",
@@ -79,10 +79,10 @@
     "url-loader": "2.1.0",
     "webpack": "4.39.1",
     "webpack-dev-server": "3.2.1",
+    "webpack-extension-reloader": "1.1.4",
     "webpack-manifest-plugin": "2.0.4",
-    "write-file-webpack-plugin": "4.5.0",
     "workbox-webpack-plugin": "4.3.1",
-    "webpack-extension-reloader": "1.1.4"
+    "write-file-webpack-plugin": "4.5.0"
   },
   "devDependencies": {
     "react": "^16.8.4",
