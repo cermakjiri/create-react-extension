@@ -98,5 +98,8 @@
     "development": [
       "last 2 chrome version"
     ]
+  },
+  "publishConfig": {
+    "access": "public"
   }
 }
