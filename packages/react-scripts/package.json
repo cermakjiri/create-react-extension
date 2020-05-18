@@ -21,7 +21,8 @@
     "scripts",
     "template",
     "template-typescript",
-    "utils"
+    "utils",
+    "custom"
   ],
   "bin": {
     "react-scripts": "./bin/react-scripts.js"
