@@ -1,6 +1,6 @@
 {
   "name": "@ackee/react-scripts-browser-extension",
-  "version": "0.2.0-alpha.2",
+  "version": "0.2.0-alpha.3",
   "description": "Configuration and scripts for Create React Browser Extension",
   "repository": {
     "type": "git",
