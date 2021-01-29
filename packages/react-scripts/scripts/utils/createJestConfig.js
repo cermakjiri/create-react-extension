@@ -11,6 +11,12 @@ const fs = require('fs');
 const chalk = require('react-dev-utils/chalk');
 const paths = require('../../config/paths');
 const modules = require('../../config/modules');
+// @ackee/react-scripts-browser-extension - beginning
+const {
+  transformConfig,
+  transformSupportedKeys,
+} = require('../../custom/scripts/utils/createJestConfig');
+// @ackee/react-scripts-browser-extension - end
 
 module.exports = (resolve, rootDir, isEjecting) => {
   // Use this instead of `paths.testsSetup` to avoid putting
@@ -22,7 +28,8 @@ module.exports = (resolve, rootDir, isEjecting) => {
     ? `<rootDir>/src/setupTests.${setupTestsFileExtension}`
     : undefined;
 
-  const config = {
+  // @ackee/react-scripts-browser-extension - beginning
+  const config = transformConfig({
     roots: ['<rootDir>/src'],
 
     collectCoverageFrom: ['src/**/*.{js,jsx,ts,tsx}', '!src/**/*.d.ts'],
@@ -58,18 +65,20 @@ module.exports = (resolve, rootDir, isEjecting) => {
       '^.+\\.module\\.(css|sass|scss)$': 'identity-obj-proxy',
     },
     moduleFileExtensions: [...paths.moduleFileExtensions, 'node'].filter(
-      ext => !ext.includes('mjs')
+      (ext) => !ext.includes('mjs')
     ),
     watchPlugins: [
       'jest-watch-typeahead/filename',
       'jest-watch-typeahead/testname',
     ],
-  };
+  });
+  // @ackee/react-scripts-browser-extension - end
   if (rootDir) {
     config.rootDir = rootDir;
   }
   const overrides = Object.assign({}, require(paths.appPackageJson).jest);
-  const supportedKeys = [
+  // @ackee/react-scripts-browser-extension - beginning
+  const supportedKeys = transformSupportedKeys([
     'collectCoverageFrom',
     'coverageReporters',
     'coverageThreshold',
@@ -84,9 +93,10 @@ module.exports = (resolve, rootDir, isEjecting) => {
     'transform',
     'transformIgnorePatterns',
     'watchPathIgnorePatterns',
-  ];
+  ]);
+  // @ackee/react-scripts-browser-extension - end
   if (overrides) {
-    supportedKeys.forEach(key => {
+    supportedKeys.forEach((key) => {
       if (Object.prototype.hasOwnProperty.call(overrides, key)) {
         if (Array.isArray(config[key]) || typeof config[key] !== 'object') {
           // for arrays or primitive types, directly override the config key
@@ -121,13 +131,13 @@ module.exports = (resolve, rootDir, isEjecting) => {
             '\nOut of the box, Create React App only supports overriding ' +
               'these Jest options:\n\n' +
               supportedKeys
-                .map(key => chalk.bold('  \u2022 ' + key))
+                .map((key) => chalk.bold('  \u2022 ' + key))
                 .join('\n') +
               '.\n\n' +
               'These options in your package.json Jest configuration ' +
               'are not currently supported by Create React App:\n\n' +
               unsupportedKeys
-                .map(key => chalk.bold('  \u2022 ' + key))
+                .map((key) => chalk.bold('  \u2022 ' + key))
                 .join('\n') +
               '\n\nIf you wish to override other Jest options, you need to ' +
               'eject from the default setup. You can do so by running ' +
